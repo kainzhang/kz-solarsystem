@@ -37,13 +37,14 @@ public class SolarSystemClient extends MyFrame {
     public List<Planet> planets = new ArrayList<>();
     {
         // 创建1000个小行星，形成小行星带（AU：2.17 ~ 3.64)
-        for (int i = 0; i < 2000; i++) {
+        for (int i = 0; i < 1000; i++) {
             Planet smallPlanet = new Planet(this, true, sun, "smallplanet", "", Math.random() * 2 + 2, 0.0, (int) (Math.random() * 3300 + 700));
             planets.add(smallPlanet);
         }
     }
 
-    public Widget astronaut = new Widget(Constant.GAME_WIDTH - 500, Constant.GAME_HEIGHT - 200, "astronaut", "Astronaut", 1, 0.9, 500);
+    public Widget ufo = new Widget(Constant.GAME_WIDTH - 400, Constant.GAME_HEIGHT + 120, "ufo", "UFO", 22, 0.1, 1000);
+    public Widget astronaut = new Widget(Constant.GAME_WIDTH - 500, Constant.GAME_HEIGHT - 250, "astronaut", "Astronaut", 1, 0.9, 500);
 
     /**
      * 默认半轴长为 4 倍长度
@@ -83,6 +84,7 @@ public class SolarSystemClient extends MyFrame {
     public void paint(Graphics g) {
         g.drawImage(bg, 0, 0, null);
         sun.draw(g);
+        halley.draw(g);
 
         // 近日行星
         mercury.draw(g);
@@ -105,15 +107,14 @@ public class SolarSystemClient extends MyFrame {
         uranus.draw(g);
         pluto.draw(g);
 
-        halley.draw(g);
-
+        ufo.draw(g);
         astronaut.draw(g);
 
         Font f = g.getFont();
-        g.setFont(new Font("微软雅黑", Font.BOLD, 20));
+        g.setFont(new Font("微软雅黑", Font.BOLD, 18));
         Color c = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("Rate: " + rate, 100, 100);
+        g.drawString("Zoom: " + rate + "x", 100, 100);
         g.setColor(c);
         g.setFont(f);
     }

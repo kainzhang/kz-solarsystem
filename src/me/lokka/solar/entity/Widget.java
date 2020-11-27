@@ -1,14 +1,12 @@
 package me.lokka.solar.entity;
 
-import me.lokka.solar.client.SolarSystemClient;
-import me.lokka.solar.constant.Constant;
 import me.lokka.solar.util.ImageUtil;
 
 import java.awt.*;
 
 public class Widget extends Star {
 
-    private int centerX, centerY;
+    private int centerX = 0, centerY = 0;
 
     public Widget(int centerX, int centerY, String imgKey, String name, double AU, double e, int T) {
         this.centerX = centerX;

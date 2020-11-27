@@ -28,6 +28,7 @@ public class ImageUtil {
 
         images.put("smallplanet", GameUtil.getImage("smallplanet.png"));
 
+        images.put("ufo", GameUtil.getImage("ufo.png"));
         images.put("astronaut", GameUtil.getImage("astronaut.png"));
     }
 
