@@ -14,6 +14,7 @@ public class ImageUtil {
         images.put("bg", GameUtil.getImage("nasa.png"));
 
         images.put("sun", GameUtil.getImage("sun-real.png"));
+        images.put("halley", GameUtil.getImage("halley.png"));
 
         images.put("mercury", GameUtil.getImage("mercury.png"));
         images.put("venus", GameUtil.getImage("venus.png"));

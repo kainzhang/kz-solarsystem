@@ -22,29 +22,30 @@ public class SolarSystemClient extends MyFrame {
 
     public Planet mercury = new Planet(this, sun, "mercury", "Mercury", 0.387, 0.2056, 88);
     public Planet venus = new Planet(this, sun, "venus", "Venus", 0.72, 0.0068, 225, false);
-    public Planet earth = new Planet(this, sun, "earth", "Earth", 1, 0.0167, 365);
-    public Planet moon = new Planet(this, earth, "moon", "", 0.3, 0.0, 365 / 12);
+    public Planet earth = new Planet(this, sun, "earth", "Earth", 1, 0.01671, 365);
+    public Planet moon = new Planet(this, earth, "moon", "", 0.3, 0, 365 / 12);
     public Planet mars = new Planet(this, sun, "mars", "Mars", 1.52, 0.0934, 687);
 
-    public Planet jupiter = new Planet(this, sun, "jupiter", "Jupiter", 5.2, 0.0489, 4330);
+    public Planet jupiter = new Planet(this, sun, "jupiter", "Jupiter", 5.2, 0.0488, 4330);
     public Planet saturn = new Planet(this, sun, "saturn", "Saturn", 9.54, 0.0557, 10832);
-    public Planet neptune = new Planet(this, sun, "neptune", "Neptune", 19.218, 0.0444, 30777);
-    public Planet uranus = new Planet(this, sun, "uranus", "Uranus", 30.06, 0.0112, 60328);
+    public Planet neptune = new Planet(this, sun, "neptune", "Neptune", 30.06, 0.0112, 60328);
+
+    public Planet uranus = new Planet(this, sun, "uranus", "Uranus", 19.218, 0.0444, 30778);
     public Planet pluto = new Planet(this, sun, "pluto", "Pluto", 39.68, 0.249, 90717);
 
-    public Planet halley = new Planet(this, sun, "venus", "Halley", 35.1, 0.967, 485);
+    public Planet halley = new Planet(this, sun, "halley", "Halley", 35.1, 0.967, 485);
 
     public List<Planet> planets = new ArrayList<>();
     {
         // 创建1000个小行星，形成小行星带（AU：2.17 ~ 3.64)
         for (int i = 0; i < 1000; i++) {
-            Planet smallPlanet = new Planet(this, true, sun, "smallplanet", "", Math.random() * 2 + 2, 0.0, (int) (Math.random() * 3300 + 700));
+            Planet smallPlanet = new Planet(this, true, sun, "smallplanet", "", Math.random() * 2 + 2, 0, (int) (Math.random() * 3300 + 700));
             planets.add(smallPlanet);
         }
     }
 
     public Widget ufo = new Widget(Constant.GAME_WIDTH - 400, Constant.GAME_HEIGHT + 120, "ufo", "UFO", 22, 0.1, 1000);
-    public Widget astronaut = new Widget(Constant.GAME_WIDTH - 500, Constant.GAME_HEIGHT - 250, "astronaut", "Astronaut", 1, 0.9, 500);
+    public Widget astronaut = new Widget(Constant.GAME_WIDTH - 500, Constant.GAME_HEIGHT - 350, "astronaut", "Astronaut", 1, 0.9, 500);
 
     /**
      * 默认半轴长为 4 倍长度
@@ -111,7 +112,7 @@ public class SolarSystemClient extends MyFrame {
         astronaut.draw(g);
 
         Font f = g.getFont();
-        g.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        g.setFont(new Font("Times New Roman", Font.BOLD, 18));
         Color c = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString("Zoom: " + rate + "x", 100, 100);

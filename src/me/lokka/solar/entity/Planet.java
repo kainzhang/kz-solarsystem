@@ -73,8 +73,8 @@ public class Planet extends Star {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
         Font f = g.getFont();
-        g.setFont(new Font("微软雅黑", Font.BOLD, 15));
-        g.drawString(name, x, y);
+        g.setFont(new Font("Times New Roman", Font.BOLD, 15));
+        g.drawString(name, x + width / 2, y + height / 2);
         g.setColor(c);
         g.setFont(f);
         move();
