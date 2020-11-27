@@ -1,14 +1,15 @@
 package me.lokka.solar.entity;
 
-import me.lokka.solar.constant.Constant;
-import me.lokka.solar.util.GameUtil;
+import me.lokka.solar.client.SolarSystemClient;
+import me.lokka.solar.util.ImageUtil;
 
 import java.awt.*;
 
-public class Planet extends Star implements Moveable, Drawable {
+public class Planet extends Star {
 
-    private boolean CCW = true; // 是否逆时针
+    private boolean ccw = true; // 是否逆时针
     private boolean isSmallPlanet = false; // 是否为小行星
+    private SolarSystemClient ssc;
 
 //    public Planet() {
 //        this.img = GameUtil.getImage("earth.png");
@@ -23,29 +24,31 @@ public class Planet extends Star implements Moveable, Drawable {
 //        this.theta = 0.0;
 //    }
 
-    public Planet(Star center, String imgName, String name, double AU, double e, int T) {
+    public Planet(SolarSystemClient ssc, Star center, String imgKey, String name, double AU, double e, int T) {
+        this.ssc = ssc;
         this.center = center;
-        this.img = GameUtil.getImage(imgName);
+        //this.img = GameUtil.getImage(imgName);
+        this.img = ImageUtil.getImage(imgKey);
         this.width = img.getWidth(null);
         this.height = img.getHeight(null);
 
         this.name = name; // 行星名称
         this.longAxis = getLongAxis(AU); // 长轴：天文单位
         this.shortAxis = getShortAxis(e); // 短轴：离心率和长轴
-        this.speed = getSpeed(T) / 5;
+        this.speed = getSpeed(T);
         this.theta = 0.0;
 
         this.x = this.center.x + this.center.width / 2 + this.longAxis - this.width / 2;
         this.y = this.center.y;
     }
 
-    public Planet(Star center, String imgName, String name, double AU, double e, int T, boolean CCW) {
-        this(center, imgName, name, AU, e, T);
-        this.CCW = CCW;
+    public Planet(SolarSystemClient ssc, Star center, String imgName, String name, double AU, double e, int T, boolean ccw) {
+        this(ssc, center, imgName, name, AU, e, T);
+        this.ccw = ccw;
     }
 
-    public Planet(boolean isSmallPlanet, Star center, String imgName, String name, double AU, double e, int T) {
-        this(center, imgName, name, AU, e, T);
+    public Planet(SolarSystemClient ssc, boolean isSmallPlanet, Star center, String imgName, String name, double AU, double e, int T) {
+        this(ssc, center, imgName, name, AU, e, T);
         this.isSmallPlanet = isSmallPlanet;
     }
 
@@ -54,11 +57,11 @@ public class Planet extends Star implements Moveable, Drawable {
     }
 
     private int getLongAxis(double AU) {
-        return (int) (100 * AU * 4);
+        return (int) (100 * AU / 6);
     }
 
     private int getShortAxis(double e) {
-        return (int) (this.longAxis * Math.sqrt(1 - e * e) / 2);
+        return (int) (longAxis * Math.sqrt(1 - e * e));
     }
 
     @Override
@@ -78,21 +81,28 @@ public class Planet extends Star implements Moveable, Drawable {
     }
 
     public void drawTrace(Graphics g) {
-        int x = this.center.x + this.center.width / 2 - this.longAxis;
-        int y = this.center.y + this.center.height / 2 - this.shortAxis;
-        int width = 2 * this.longAxis;
-        int height = 2 * this.shortAxis;
+        int x = (int) (center.x + center.width / 2
+                + Math.sqrt((longAxis * ssc.rate) * (longAxis * ssc.rate) - (shortAxis * ssc.rate) * (shortAxis * ssc.rate))
+                - longAxis * ssc.rate);
+        int y = center.y + center.height / 2 - shortAxis * ssc.rate;
+        int width = 2 * longAxis * ssc.rate;
+        int height = 2 * shortAxis * ssc.rate;
         Color c = g.getColor();
-        g.setColor(Color.WHITE);
+        g.setColor(Color.GRAY);
         g.drawOval(x, y, width, height);
         g.setColor(c);
     }
 
     @Override
     public void move() {
-        x = (int) (this.center.x + this.center.width / 2 - this.width / 2 + longAxis * Math.cos(theta));
-        y = (int) (this.center.y + this.center.height / 2 - this.height / 2 + shortAxis * Math.sin(theta));
-        if (CCW) {
+        x = (int) (center.x + center.width / 2
+                + Math.sqrt((longAxis * ssc.rate) * (longAxis * ssc.rate) - (shortAxis * ssc.rate) * (shortAxis * ssc.rate))
+                - width / 2
+                - longAxis * ssc.rate * Math.cos(theta));
+        y = (int) (this.center.y + this.center.height / 2
+                - this.height / 2
+                + shortAxis * ssc.rate * Math.sin(theta));
+        if (ccw) {
             this.theta -= speed;
         } else {
             this.theta += speed;
