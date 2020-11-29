@@ -46,10 +46,6 @@ public class MyFrame extends Frame {
         }
     }
 
-    /**
-     * 使用双缓冲技术
-     */
-
     // 解决图片闪烁的问题，用双缓冲方法解决闪烁问题
     Image backImg = null;
 

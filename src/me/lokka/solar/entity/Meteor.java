@@ -33,11 +33,14 @@ public class Meteor extends Star {
     public void move() {
         x = x - (int) (speed * Math.cos(theta));
         y = y + (int) (speed * Math.sin(theta));
-        if (x >= Constant.GAME_WIDTH || x <= -width) {
+        if (x <= -width) {
             x = originX;
+            y = originY;
         }
-        if (y >= Constant.GAME_HEIGHT) {
+        if (y > Constant.GAME_HEIGHT) {
             y = originY;
         }
     }
 }
+
+

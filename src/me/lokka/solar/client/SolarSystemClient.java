@@ -47,19 +47,28 @@ public class SolarSystemClient extends MyFrame {
 
     public List<Meteor> meteors = new ArrayList<>();
     {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             Meteor meteor = new Meteor(
-                    (int) (Constant.GAME_HEIGHT / Math.sqrt(3) + Math.random() * Constant.GAME_WIDTH),
-                    (int) (-Constant.GAME_HEIGHT + Math.random() * Constant.GAME_HEIGHT),
+                    (int) (Constant.GAME_HEIGHT * 1.0 / Math.sqrt(3) + Math.random() * Constant.GAME_WIDTH),
+                    (int) (-Constant.GAME_HEIGHT * 1.0 + Math.random() * Constant.GAME_HEIGHT),
                     Math.PI / 3, 20, "meteor"
             );
             meteors.add(meteor);
         }
     }
 
+    public Widget ufo = new Widget(
+            Constant.GAME_WIDTH - 400,
+            Constant.GAME_HEIGHT + 120,
+            "ufo", "UFO", 22, 0.1, 1000
+    );
 
-    public Widget ufo = new Widget(Constant.GAME_WIDTH - 400, Constant.GAME_HEIGHT + 120, "ufo", "UFO", 22, 0.1, 1000);
-    public Widget astronaut = new Widget(Constant.GAME_WIDTH - 500, Constant.GAME_HEIGHT - 350, "astronaut", "Astronaut", 1, 0.9, 500);
+    public Widget astronaut = new Widget(
+            Constant.GAME_WIDTH - 500,
+            Constant.GAME_HEIGHT - 350,
+            "astronaut", "Astronaut",
+            1, 0.9, 500
+    );
 
     /**
      * 默认半轴长为 4 倍长度
@@ -76,7 +85,6 @@ public class SolarSystemClient extends MyFrame {
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                //System.out.println(e.getKeyCode());
                 // 按 ⬆️ 键 rate 增加2倍
                 // 按 ⬇️ 键 rate 缩小2倍
                 switch (e.getKeyCode()) {

@@ -11,23 +11,9 @@ public class Planet extends Star {
     private boolean isSmallPlanet = false; // 是否为小行星
     private SolarSystemClient ssc;
 
-//    public Planet() {
-//        this.img = GameUtil.getImage("earth.png");
-//        this.width = img.getWidth(null);
-//        this.height = img.getHeight(null);
-//        this.longAxis = 400;
-//        this.shortAxis = 150;
-//        this.x = Constant.GAME_WIDTH / 2 + this.longAxis;
-//        this.y = Constant.GAME_HEIGHT / 2;
-//        this.name = "earth";
-//        this.speed = 0.01;
-//        this.theta = 0.0;
-//    }
-
     public Planet(SolarSystemClient ssc, Star center, String imgKey, String name, double AU, double e, int T) {
         this.ssc = ssc;
         this.center = center;
-        //this.img = GameUtil.getImage(imgName);
         this.img = ImageUtil.getImage(imgKey);
         this.width = img.getWidth(null);
         this.height = img.getHeight(null);
