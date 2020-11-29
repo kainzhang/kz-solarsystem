@@ -1,6 +1,7 @@
 package me.lokka.solar.client;
 
 import me.lokka.solar.constant.Constant;
+import me.lokka.solar.entity.Meteor;
 import me.lokka.solar.entity.Planet;
 import me.lokka.solar.entity.Sun;
 import me.lokka.solar.entity.Widget;
@@ -43,6 +44,19 @@ public class SolarSystemClient extends MyFrame {
             planets.add(smallPlanet);
         }
     }
+
+    public List<Meteor> meteors = new ArrayList<>();
+    {
+        for (int i = 0; i < 20; i++) {
+            Meteor meteor = new Meteor(
+                    (int) (Constant.GAME_HEIGHT / Math.sqrt(3) + Math.random() * Constant.GAME_WIDTH),
+                    (int) (-Constant.GAME_HEIGHT + Math.random() * Constant.GAME_HEIGHT),
+                    Math.PI / 3, 20, "meteor"
+            );
+            meteors.add(meteor);
+        }
+    }
+
 
     public Widget ufo = new Widget(Constant.GAME_WIDTH - 400, Constant.GAME_HEIGHT + 120, "ufo", "UFO", 22, 0.1, 1000);
     public Widget astronaut = new Widget(Constant.GAME_WIDTH - 500, Constant.GAME_HEIGHT - 350, "astronaut", "Astronaut", 1, 0.9, 500);
@@ -107,6 +121,11 @@ public class SolarSystemClient extends MyFrame {
         // 远日行星
         uranus.draw(g);
         pluto.draw(g);
+
+        // 流星雨
+        for (Meteor meteor : meteors) {
+            meteor.draw(g);
+        }
 
         ufo.draw(g);
         astronaut.draw(g);

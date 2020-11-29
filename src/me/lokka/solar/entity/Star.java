@@ -18,7 +18,4 @@ public abstract class Star implements Moveable, Drawable{
     // 环绕中心
     public Star center;
 
-    /**
-     * interface定义行为，abstract class定义属性
-     */
 }
