@@ -23,16 +23,16 @@ public class SolarSystemClient extends MyFrame {
 
     public Planet mercury = new Planet(this, sun, "mercury", "Mercury", 0.387, 0.2056, 88);
     public Planet venus = new Planet(this, sun, "venus", "Venus", 0.72, 0.0068, 225, false);
-    public Planet earth = new Planet(this, sun, "earth", "Earth", 1, 0.01671, 365);
+    public Planet earth = new Planet(this, sun, "earth", "Earth", 1, 0.0167, 365);
     public Planet moon = new Planet(this, earth, "moon", "", 0.3, 0, 365 / 12);
     public Planet mars = new Planet(this, sun, "mars", "Mars", 1.52, 0.0934, 687);
 
     public Planet jupiter = new Planet(this, sun, "jupiter", "Jupiter", 5.2, 0.0488, 4330);
     public Planet saturn = new Planet(this, sun, "saturn", "Saturn", 9.54, 0.0557, 10832);
-    public Planet neptune = new Planet(this, sun, "neptune", "Neptune", 30.06, 0.0112, 60328);
 
     public Planet uranus = new Planet(this, sun, "uranus", "Uranus", 19.218, 0.0444, 30778);
-    public Planet pluto = new Planet(this, sun, "pluto", "Pluto", 39.68, 0.249, 90717);
+    public Planet neptune = new Planet(this, sun, "neptune", "Neptune", 30.06, 0.0112, 60328);
+    public Planet pluto = new Planet(this, sun, "pluto", "Pluto", 39.68, 0.2490, 90717);
 
     public Planet halley = new Planet(this, sun, "halley", "Halley", 35.1, 0.967, 485);
 
@@ -109,12 +109,14 @@ public class SolarSystemClient extends MyFrame {
         sun.draw(g);
         halley.draw(g);
 
-        // 近日行星
+        // 类地行星
         mercury.draw(g);
         venus.draw(g);
         earth.draw(g);
-        moon.draw(g);
         mars.draw(g);
+
+        // 月球
+        moon.draw(g);
 
         // 小行星带
         for (Planet planet : planets) {
@@ -124,10 +126,12 @@ public class SolarSystemClient extends MyFrame {
         // 巨行星
         jupiter.draw(g);
         saturn.draw(g);
-        neptune.draw(g);
 
         // 远日行星
         uranus.draw(g);
+        neptune.draw(g);
+
+        // 冥王星
         pluto.draw(g);
 
         // 流星雨
@@ -135,6 +139,7 @@ public class SolarSystemClient extends MyFrame {
             meteor.draw(g);
         }
 
+        // 挂件
         ufo.draw(g);
         astronaut.draw(g);
 
